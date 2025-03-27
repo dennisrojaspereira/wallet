@@ -15,7 +15,8 @@ Withdraw Funds: Allows users to withdraw money from their wallets.
 Transfer Funds: Facilitates the transfer of money between user wallets.
 
 # Architecture
-![image](https://github.com/user-attachments/assets/dd3322ca-f7de-4525-a600-c94149d96fff)
+![image](https://github.com/user-attachments/assets/2e3a3208-49cb-4ce5-b8fb-52e0d3fa3476)
+
 
 
 ![Wallet](https://github.com/user-attachments/assets/57c3848b-b180-433e-b9b5-480fe7af83ac)
