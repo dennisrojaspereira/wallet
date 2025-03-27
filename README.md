@@ -40,7 +40,7 @@ Kafka: Used for messaging and event handling between services.
 
 Jaeger: Distributed tracing tool for monitoring performance.
 
-Data Flow:
+# Sequence Diagram
 API Gateway receives user requests and forwards them to the appropriate services.
 
 Auth Rate Limit controls the number of authentication requests, preventing system overload.
@@ -94,26 +94,23 @@ Go
 
 Kafka
 
-Environment Configuration Configure the .env file with credentials and settings for each service, including Kafka, MySQL, Redis, and MongoDB.
-
-Running Services Locally
-
+# To run 
 Clone the repository.
 
-Start the Docker containers:
-docker-compose up
-Services will be available on the ports defined in the .env file.
 
-Run Main of transaction 
+1 ) docker-compose up
 
-Execute curl
+2 ) docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic audit-events --from-beginning
 
-curl -X POST "http://localhost:8081/transactions"      -H "Content-Type: application/x-www-form-urlencoded"      -d "walletId=12345"      -d "type=deposit"      -d "amount=100.50"
+3) In folder transaction "execute gradle bootRun".
 
-In the folder audit run:
+4 ) curl -X POST "http://localhost:8081/transactions"      -H "Content-Type: application/x-www-form-urlencoded"      -d "walletId=12345"      -d "type=deposit"      -d "amount=100.50"
 
-docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic audit-events --from-beginning
-go run cmd/main.go
+5) In folder audit execute "go run cmd/main.go"
+
+6) In folder balance execute "gradle quarkusDev" 
+
+5) In folder wallet execute "node app.js" 
 
 
 
