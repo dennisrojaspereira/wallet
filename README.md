@@ -18,6 +18,8 @@ Transfer Funds: Facilitates the transfer of money between user wallets.
 ![image](https://github.com/user-attachments/assets/dd3322ca-f7de-4525-a600-c94149d96fff)
 
 
+![Wallet](https://github.com/user-attachments/assets/57c3848b-b180-433e-b9b5-480fe7af83ac)
+
 Main Components:
 API Gateway: Handles incoming requests and routes them to the appropriate services.
 
