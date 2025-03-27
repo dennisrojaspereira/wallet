@@ -20,7 +20,6 @@ services:
       - "5432:5432"
     container_name: postgres
 
-
   mysql:
     image: mysql:8
     environment:
@@ -39,10 +38,15 @@ services:
     container_name: redis
 
   mongodb:
-    image: mongo:6
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: auditDB
     ports:
-      - "27017:27017"
-    container_name: mongodb
+      - "27017:27017"     
+
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -55,6 +59,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:
@@ -63,6 +68,12 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092  # Para acesso externo ao Kafka
+      KAFKA_LISTENER_NAME_PLANE: PLAINTEXT
+      KAFKA_LISTENER_PORT: 9092
+      KAFKA_LISTENER_INTERFACE: 0.0.0.0
+      KAFKA_LISTENER_SECURITY_PROTOCOL: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    container_name: kafka
+    volumes:
+      - .kafka_data:/var/lib/kafka/data
+
