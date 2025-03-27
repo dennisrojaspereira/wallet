@@ -58,15 +58,25 @@ Jaeger is used for tracking and monitoring the performance of each service in re
 
 # Technologies
 Node.js (for Wallet Service)
+
 Java + Spring (for Transaction Service)
+
 Go (for Audit Service)
+
 MySQL (for wallet data storage)
+
 PostgreSQL (for transactions)
+
 Redis (for balance caching)
+
 MongoDB (for auditing)
+
 Keycloak (for user authentication)
+
 Kafka (for messaging)
+
 Jaeger (for distributed tracing)
+
 
 # Running the Project
 ## Prerequisites
