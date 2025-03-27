@@ -103,6 +103,21 @@ Start the Docker containers:
 docker-compose up
 Services will be available on the ports defined in the .env file.
 
+Run Main of transaction 
+
+Execute curl
+
+curl -X POST "http://localhost:8081/transactions"      -H "Content-Type: application/x-www-form-urlencoded"      -d "walletId=12345"      -d "type=deposit"      -d "amount=100.50"
+
+In the folder audit run:
+
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic audit-events --from-beginning
+go run cmd/main.go
+
+
+
+
+
 Running Tests To run unit and integration tests:
 
 Wallet Service (Node.js):
