@@ -3,3 +3,4 @@ wallet/node_modules
 balance/.gradle
 balance/.idea
 balance/build
+.kafka_data

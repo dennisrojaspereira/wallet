@@ -19,6 +19,9 @@ services:
     ports:
       - "5432:5432"
     container_name: postgres
+    labels:
+      - "io.jaeger.enabled=true"
+      - "io.jaeger.service.name=postgres"
 
   mysql:
     image: mysql:8
@@ -30,12 +33,18 @@ services:
     ports:
       - "3306:3306"
     container_name: mysql
+    labels:
+      - "io.jaeger.enabled=true"
+      - "io.jaeger.service.name=mysql"
 
   redis:
     image: redis:7
     ports:
       - "6379:6379"
     container_name: redis
+    labels:
+      - "io.jaeger.enabled=true"
+      - "io.jaeger.service.name=redis"
 
   mongodb:
     image: mongo
@@ -45,7 +54,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: auditDB
     ports:
-      - "27017:27017"     
+      - "27017:27017"
+    labels:
+      - "io.jaeger.enabled=true"
+      - "io.jaeger.service.name=mongodb"
 
 
   zookeeper:
@@ -77,3 +89,18 @@ services:
     volumes:
       - .kafka_data:/var/lib/kafka/data
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
+  hotrod:
+    image: jaegertracing/example-hotrod:latest
+    ports:
+      - "8083:8080"
+    command: ["all"]
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+    depends_on:
+      - jaeger
