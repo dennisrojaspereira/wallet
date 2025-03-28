@@ -11,7 +11,7 @@ const consumeMessagesFromKafka = async () => {
 
     await consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
-            console.log(`Mensagem recebida: ${message.value.toString()}`);
+            console.log(`Message received: ${message.value.toString()}`);
 
             cacheWalletBalance(userId, balance);
 
