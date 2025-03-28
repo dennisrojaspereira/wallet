@@ -1,4 +1,4 @@
-package br.com.dennis.balance;
+package balance;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 

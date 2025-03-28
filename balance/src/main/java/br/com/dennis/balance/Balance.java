@@ -1,4 +1,4 @@
-package br.com.dennis.balance;
+package balance;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;

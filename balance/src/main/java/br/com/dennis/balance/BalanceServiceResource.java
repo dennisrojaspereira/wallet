@@ -1,4 +1,4 @@
-package br.com.dennis.balance;
+package balance;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
