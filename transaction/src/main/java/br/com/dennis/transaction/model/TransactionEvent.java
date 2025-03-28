@@ -1,9 +1,15 @@
 package br.com.dennis.transaction.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
+@Entity
 public class TransactionEvent {
+
+    @Id
     private String transactionId;
     private String walletId;
     private String type;

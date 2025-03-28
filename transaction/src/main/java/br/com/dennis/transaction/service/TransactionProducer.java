@@ -11,17 +11,21 @@ public class TransactionProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
+    private final TransactionRepository transactionRepository;
 
-    public TransactionProducer(KafkaTemplate<String, String> kafkaTemplate,ObjectMapper objectMapper) {
+
+    public TransactionProducer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper, TransactionRepository transactionRepository) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = objectMapper;
+        this.transactionRepository = transactionRepository;
     }
 
     public void publishTransaction(TransactionEvent event) {
         try {
             String json = objectMapper.writeValueAsString(event);
-            kafkaTemplate.send("transaction.executed", json);
+            kafkaTemplate.send("audit-events", json);
             System.out.println("Event sent: " + json);
+            transactionRepository.save(event);
         } catch (Exception e) {
             e.printStackTrace();
         }
