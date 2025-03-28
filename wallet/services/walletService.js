@@ -3,20 +3,6 @@ const { producer, consumer } = require('../config/kafka');
 const { mysqlConnection, redisClient } = require('../config/database');
 
 
-const sendMessageToKafka = async (message) => {
-    try {
-        await producer.connect();
-        await producer.send({
-            topic: 'audit-events', // Tópico no Kafka
-            messages: [{ value: message }],
-        });
-        console.log('Mensagem enviada para o Kafka:', message);
-    } catch (err) {
-        console.error('Erro ao enviar mensagem para o Kafka:', err);
-    } finally {
-        await producer.disconnect();
-    }
-};
 
 
 const consumeMessagesFromKafka = async () => {
@@ -26,7 +12,9 @@ const consumeMessagesFromKafka = async () => {
     await consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
             console.log(`Mensagem recebida: ${message.value.toString()}`);
-            // Processamento da mensagem recebida
+
+            cacheWalletBalance(userId, balance);
+
         },
     });
 };

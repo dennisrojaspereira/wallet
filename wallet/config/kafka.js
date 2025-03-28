@@ -7,6 +7,6 @@ const kafka = new Kafka({
 });
 
 const producer = kafka.producer();
-const consumer = kafka.consumer({ groupId: 'wallet-group' });
+const consumer = kafka.consumer({ groupId: 'audit-event' });
 
 module.exports = { producer, consumer };

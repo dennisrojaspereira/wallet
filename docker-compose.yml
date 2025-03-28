@@ -68,12 +68,18 @@ services:
     ports:
       - "2181:2181"
     container_name: zookeeper
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-log:/var/lib/zookeeper/log
+
+
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
     depends_on:
       - zookeeper
+
     ports:
       - "9092:9092"
     environment:
@@ -87,7 +93,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - .kafka_data:/var/lib/kafka/data
+      - kafka-data:/var/lib/kafka/data
 
   jaeger:
     image: jaegertracing/all-in-one:latest
@@ -138,3 +144,8 @@ services:
 networks:
   kong-net:
     driver: bridge
+
+volumes:
+  zookeeper-data:
+  zookeeper-log:
+  kafka-data:
